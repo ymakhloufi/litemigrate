@@ -1,0 +1,28 @@
+name: golangci-lint
+on:
+  push:
+    tags:
+      - v*
+    branches:
+      - master
+      - main
+  pull_request:
+permissions:
+  contents: read
+  # Optional: allow read access to pull request. Use with `only-new-issues` option.
+  # pull-requests: read
+jobs:
+  golangci:
+    name: lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-go@v4
+        with:
+          go-version: '1.20'
+      - uses: KengoTODA/actions-setup-docker-compose@v1
+          with:
+            version: '2.17.3'
+      - uses: actions/checkout@v3
+      - name: Create annotation for build error
+        run: |
+          make test

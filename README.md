@@ -99,3 +99,18 @@ func main() {
 	}
 }
 ```
+
+### The Migration table will look like this:
+
+------------------
+
+| id | filename                          | started_at                 | completed_at               |
+|----|-----------------------------------|----------------------------|----------------------------|
+| 1  | 0001_create_some_table.sql        | 2021-01-01 01:23:34.123456 | 2021-01-01 01:23:35.123456 |
+| 2  | 0002_alter_some_table.sql         | 2021-01-02 01:23:34.123456 | 2021-01-02 01:23:35.123456 |
+| 3  | 0003_failing_schema_migration.sql | 2021-01-03 01:23:34.123456 | NULL                       |
+
+The NULL in the completed_at column will result in future runs not executing and exiting with a non-zero exit status.
+You will have to login to your DB and fix it by hand once you made sure that the botched migration didn't cause any
+issues. Either set the `completed_at` timestamp to womething non-null, or delete the row altogether (depending on
+whether you want to re-run the migration or not).

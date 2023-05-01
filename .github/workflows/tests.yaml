@@ -1,4 +1,4 @@
-name: golangci-lint
+name: Run Unit and Integration Tests
 on:
   push:
     tags:
@@ -13,7 +13,7 @@ permissions:
   # pull-requests: read
 jobs:
   tests:
-    name: tests
+    name: make test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/setup-go@v4

@@ -18,18 +18,17 @@ lint: ## Run linters.
 	golangci-lint -c .ci/golangci.yaml run
 
 .PHONY: test
-test: ## Run tests.
-	@docker-compose -f .docker/docker-compose.yaml up -d --remove-orphans
+test: up ## Run tests.
 	CGO_ENABLED=0 go test ./... -cover
-	@docker-compose -f .docker/docker-compose.yaml down -v --remove-orphans
+	make down
 
 .PHONY: up
 up: ## Run docker-compose up.
-	@docker-compose -f .docker/docker-compose.yaml up -d --remove-orphans
+	docker-compose -f .docker/docker-compose.yaml up -d --remove-orphans
 
 .PHONY: down
 down: ## Run docker-compose down.
-	@docker-compose -f .docker/docker-compose.yaml down -v --remove-orphans
+	docker-compose -f .docker/docker-compose.yaml down -v --remove-orphans
 
 .PHONY: mod
 mod:
@@ -39,5 +38,5 @@ mod:
 
 .PHONY: clean
 clean: ## Remove compiled binaries.
-	@$(GOCMD) clean
+	$(GOCMD) clean
 

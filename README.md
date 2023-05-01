@@ -17,7 +17,7 @@ runs and whether they have been completed successfully. The migration files (loc
 - Migrations are NOT wrapped into transactions that can be rolled back. Not everything can be wrapped into a
   transaction, so it is in the user's responsibility touse transactions in their migration files.
 
-### Config options
+### Config options (Set as ENV variables)
 
 | Option | Description                                                                                                                                                       | Default        |
 |--------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------|

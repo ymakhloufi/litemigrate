@@ -6,8 +6,8 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/require"
-	"github.com/ymakhloufi/light-migrate/internal/pkg/fsutils"
-	"github.com/ymakhloufi/light-migrate/internal/pkg/migration/model"
+	"github.com/ymakhloufi/litemigrate/internal/pkg/fsutils"
+	"github.com/ymakhloufi/litemigrate/internal/pkg/migration/model"
 	"go.uber.org/zap"
 )
 

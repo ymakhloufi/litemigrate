@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"errors"
 
-	"github.com/ymakhloufi/light-migrate/internal/pkg/migration/model"
+	"github.com/ymakhloufi/litemigrate/internal/pkg/migration/model"
 )
 
 type SQLStore struct {

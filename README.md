@@ -67,8 +67,8 @@ then    -v "`pwd`/my_local_migrations_folder:/folder_inside_container"
 package main
 
 import (
-	"github.com/ymakhloufi/light-migrate/pkg/migrator"
-	"github.com/ymakhloufi/light-migrate/pkg/migrator/store"
+	"github.com/ymakhloufi/litemigrate/pkg/migrator"
+	"github.com/ymakhloufi/litemigrate/pkg/migrator/store"
 	"go.uber.org/zap"
 
 	"log"

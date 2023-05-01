@@ -34,7 +34,7 @@ down: ## Run docker-compose down.
 mod:
 	$(GOCMD) get -u -t ./...
 	$(GOCMD) mod tidy
-	make vendor
+	#make vendor
 
 .PHONY: clean
 clean: ## Remove compiled binaries.

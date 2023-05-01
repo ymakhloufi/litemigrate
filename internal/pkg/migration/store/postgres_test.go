@@ -6,7 +6,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/require"
-	"github.com/ymakhloufi/light-migrate/internal/pkg/migration/model"
+	"github.com/ymakhloufi/litemigrate/internal/pkg/migration/model"
 )
 
 // tests for postgresstore.go

@@ -6,8 +6,8 @@ import (
 	"os"
 	"syscall"
 
-	"github.com/ymakhloufi/light-migrate/pkg/migrator"
-	"github.com/ymakhloufi/light-migrate/pkg/migrator/store"
+	"github.com/ymakhloufi/litemigrate/pkg/migrator"
+	"github.com/ymakhloufi/litemigrate/pkg/migrator/store"
 	"go.uber.org/zap"
 )
 

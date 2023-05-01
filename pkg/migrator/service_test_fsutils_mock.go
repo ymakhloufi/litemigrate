@@ -3,7 +3,7 @@ package migrator
 import (
 	"io/fs"
 
-	"github.com/ymakhloufi/light-migrate/internal/pkg/fsutils"
+	"github.com/ymakhloufi/litemigrate/internal/pkg/fsutils"
 )
 
 type fsUtilsMock struct {

@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"path/filepath"
 
-	"github.com/ymakhloufi/light-migrate/internal/pkg/fsutils"
-	"github.com/ymakhloufi/light-migrate/internal/pkg/migration/model"
+	"github.com/ymakhloufi/litemigrate/internal/pkg/fsutils"
+	"github.com/ymakhloufi/litemigrate/internal/pkg/migration/model"
 	"go.uber.org/zap"
 )
 

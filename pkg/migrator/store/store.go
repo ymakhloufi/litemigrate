@@ -1,7 +1,7 @@
 package store
 
 import (
-	"github.com/ymakhloufi/light-migrate/internal/pkg/migration/store"
+	"github.com/ymakhloufi/litemigrate/internal/pkg/migration/store"
 	"go.uber.org/zap"
 )
 

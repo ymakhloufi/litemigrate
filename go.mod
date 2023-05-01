@@ -1,4 +1,4 @@
-module github.com/ymakhloufi/light-migrate
+module github.com/ymakhloufi/litemigrate
 
 go 1.20
 

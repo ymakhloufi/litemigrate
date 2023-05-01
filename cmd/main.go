@@ -20,7 +20,8 @@ func main() {
 
 	migrationStore := instantiateStore(logger)
 
-	migrationSvc := migrator.New(logger, migrationStore, getEnv("DIR", defaultMigrationsDir))
+	skipDownFiles := getEnv("SKIP_DOWN_FILES", "false") == "true"
+	migrationSvc := migrator.New(logger, migrationStore, getEnv("DIR", defaultMigrationsDir), skipDownFiles)
 	defer migrationSvc.Close()
 
 	err := migrationSvc.Up()
@@ -32,7 +33,7 @@ func main() {
 
 func instantiateLogger() (*zap.Logger, func()) {
 	logger, err := zap.NewProduction()
-	if os.Getenv("ENV") == "local" {
+	if getEnv("ENV", "production") == "local" {
 		logger, err = zap.NewDevelopment()
 	}
 	if err != nil {
@@ -55,7 +56,7 @@ func instantiateStore(logger *zap.Logger) migrator.Store {
 	migrationsTable := getEnv("TABLE", defaultMigrationsTable)
 
 	var repo migrator.Store
-	switch driver := os.Getenv("DRIVER"); driver {
+	switch driver := getEnv("DRIVER", "-not-set-"); driver {
 	case "postgres":
 		connectionString := store.UserAuthConfigFromEnv().ToConnectionString() // user/pass/... from env
 		repo, err = store.NewPostgresStore(logger, migrationsTable, connectionString)

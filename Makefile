@@ -25,6 +25,7 @@ test: up ## Run tests.
 .PHONY: up
 up: ## Run docker-compose up.
 	docker-compose -f .docker/docker-compose.yaml up -d --remove-orphans
+	@sleep 1 # pg sometimes takes a second to be reachable after it's up
 
 .PHONY: down
 down: ## Run docker-compose down.

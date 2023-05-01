@@ -19,17 +19,18 @@ runs and whether they have been completed successfully. The migration files (loc
 
 ### Config options (Set as ENV variables)
 
-| Option | Description                                                                                                                                                       | Default        |
-|--------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------|
-| ENV    | Determines whether to log in JSON or human readable format. Possible values: `local`, `production`                                                                | `production`   |
-| TABLE  | Name of the table that will be created to keep track of migrations                                                                                                | `_migrations`  |
-| DIR    | Path to the folder that contains the migration files. If you run it inside a container, you need to mount your migrations files into the same path (see example). | `./migrations` |
-| DRIVER | Database driver to use. Currently only `postgres` is supported.                                                                                                   | -none-         |
-| HOST   | Hostname of the database server                                                                                                                                   | -none-         |
-| PORT   | Port of the database server                                                                                                                                       | -none-         |
-| USER   | Username to use for connecting to the database                                                                                                                    | -none-         |
-| PASS   | Password to use for connecting to the database                                                                                                                    | -none-         |
-| DB     | Name of the database to connect to                                                                                                                                | -none-         |
+| Option          | Description                                                                                         | Default        |
+|-----------------|-----------------------------------------------------------------------------------------------------|----------------|
+| ENV             | Determines whether to log in JSON or human readable format. Possible values: `local`, `production`  | `production`   |
+| TABLE           | Name of the table that will be created to keep track of migrations                                  | `_migrations`  |
+| DIR             | Path to the folder that contains the migration files.                                               | `./migrations` |
+| DRIVER          | Database driver to use. Currently only `postgres` is supported.                                     | -none-         |
+| HOST            | Hostname of the database server                                                                     | -none-         |
+| PORT            | Port of the database server                                                                         | -none-         |
+| USER            | Username to use for connecting to the database                                                      | -none-         |
+| PASS            | Password to use for connecting to the database                                                      | -none-         |
+| DB              | Name of the database to connect to                                                                  | -none-         |
+| SKIP_DOWN_FILES | If set to `true`, the tool will skip all migration files suffixed with `*down.sql`                  | `false`        |
 
 ### How to use
 
@@ -51,6 +52,7 @@ docker run \
   -e USER="my_user" \
   -e PASS="my_password" \
   -e DB="my_db" \
+  -e SKIP_DOWN_FILES="true" \
   --net=host \
   -v "`pwd`/my_migrations_folder:/migrations" \
   y11a/litemigrate:1

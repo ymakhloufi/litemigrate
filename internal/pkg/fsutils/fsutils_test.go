@@ -14,6 +14,7 @@ func TestService_getMigrationFileList(t *testing.T) {
 		name                string
 		existingFiles       []string
 		existingDirectories []string
+		skipDownFlag        bool
 		want                []string
 	}{
 		{
@@ -35,6 +36,36 @@ func TestService_getMigrationFileList(t *testing.T) {
 			name:          "returns files in sorted order",
 			existingFiles: []string{"bbb.sql", "ccc.sql", "aaa.sql", "qqq.sql", "111.sql"},
 			want:          []string{"111.sql", "aaa.sql", "bbb.sql", "ccc.sql", "qqq.sql"},
+		},
+		{
+			name: "skips migrations if skipDownFiles-flag is true",
+			existingFiles: []string{
+				"001_foo.sql",
+				"002_bar_down.sql",
+				"003_baz.down.sql",
+				"004_quo.DOWN.sql",
+				"005_qux.sql",
+			},
+			skipDownFlag: true,
+			want:         []string{"001_foo.sql", "005_qux.sql"},
+		},
+		{
+			name: "doesn't skip migrations if skipDownFiles-flag is false",
+			existingFiles: []string{
+				"001_foo.sql",
+				"002_bar_down.sql",
+				"003_baz.down.sql",
+				"004_quo.DOWN.sql",
+				"005_qux.sql",
+			},
+			skipDownFlag: false,
+			want: []string{
+				"001_foo.sql",
+				"002_bar_down.sql",
+				"003_baz.down.sql",
+				"004_quo.DOWN.sql",
+				"005_qux.sql",
+			},
 		},
 	}
 	for _, tt := range tests {
@@ -59,7 +90,7 @@ func TestService_getMigrationFileList(t *testing.T) {
 				require.NoError(t, err)
 			}
 
-			s := &FsUtils{}
+			s := &FsUtils{SkipDownFiles: tt.skipDownFlag}
 			got, err := s.GetMigrationFileList(dir)
 			require.NoError(t, err)
 

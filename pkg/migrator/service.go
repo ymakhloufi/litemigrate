@@ -33,11 +33,12 @@ type Service struct {
 	migrationPath string
 }
 
-func New(logger *zap.Logger, store Store, migrationPath string) *Service {
+// New returns a new migrator service
+func New(logger *zap.Logger, store Store, migrationPath string, skipDownFiles bool) *Service {
 	return &Service{
 		logger:        logger,
 		store:         store,
-		fsUtils:       &fsutils.FsUtils{},
+		fsUtils:       &fsutils.FsUtils{SkipDownFiles: skipDownFiles},
 		migrationPath: migrationPath,
 	}
 }

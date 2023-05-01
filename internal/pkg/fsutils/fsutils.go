@@ -12,7 +12,9 @@ func (s DirElements) Len() int           { return len(s) }
 func (s DirElements) Less(i, j int) bool { return strings.Compare(s[i].Name(), s[j].Name()) == -1 }
 func (s DirElements) Swap(i, j int)      { s[i], s[j] = s[j], s[i] }
 
-type FsUtils struct{}
+type FsUtils struct {
+	SkipDownFiles bool
+}
 
 func (s *FsUtils) GetMigrationFileList(dir string) (DirElements, error) {
 	files, err := os.ReadDir(dir)
@@ -23,6 +25,9 @@ func (s *FsUtils) GetMigrationFileList(dir string) (DirElements, error) {
 	result := DirElements{}
 	for _, file := range files {
 		if !file.IsDir() && strings.HasSuffix(file.Name(), ".sql") {
+			if s.SkipDownFiles && strings.HasSuffix(strings.ToLower(file.Name()), "down.sql") {
+				continue
+			}
 			result = append(result, file)
 		}
 	}

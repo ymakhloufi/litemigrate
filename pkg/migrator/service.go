@@ -3,6 +3,7 @@ package migrator
 import (
 	"fmt"
 	"path/filepath"
+	"strings"
 
 	"github.com/ymakhloufi/litemigrate/internal/pkg/fsutils"
 	"github.com/ymakhloufi/litemigrate/internal/pkg/migration/model"
@@ -39,7 +40,7 @@ func New(logger *zap.Logger, store Store, migrationPath string, skipDownFiles bo
 		logger:        logger,
 		store:         store,
 		fsUtils:       &fsutils.FsUtils{SkipDownFiles: skipDownFiles},
-		migrationPath: migrationPath,
+		migrationPath: strings.TrimPrefix(migrationPath, "file://"),
 	}
 }
 

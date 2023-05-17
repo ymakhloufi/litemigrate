@@ -6,7 +6,7 @@ endif
 
 GO_LINT?=
 GOCMD?=CGO_ENABLED=0 go
-GOCMD_TEST?=VOI_ENV=test
+VERSION?=latest
 
 ##@ General
 help: ## Display this help.
@@ -41,3 +41,7 @@ mod:
 clean: ## Remove compiled binaries.
 	$(GOCMD) clean
 
+##@ Deployment
+.PHONY: build
+build: ## Build the binary.
+	docker build . -f .docker/Dockerfile -t y11a/litemigrate:$(VERSION)
